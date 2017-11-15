@@ -1,37 +1,33 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-import { createStore, combineReducers } from 'redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+import thunk from "redux-thunk";
 import { Provider } from 'react-redux'
-import { Router, Route, browserHistory } from 'react-router'
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
-import reducers from './reducers/'
+import createHistory from 'history/createBrowserHistory'
 
-registerServiceWorker();
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
+import App from './App.js';
 
-// Add the reducer to your store on the `routing` key
+import reducers from './reducers' // Or wherever you keep your reducers
+
 const store = createStore(
   combineReducers({
     ...reducers,
-    routing: routerReducer
-  })
+  }),
+  applyMiddleware(thunk)
 )
 
-// Create an enhanced history that syncs navigation events with the store
-const history = syncHistoryWithStore(browserHistory, store)
+// Now you can dispatch navigation actions from anywhere!
+// store.dispatch(push('/foo'))
 
 ReactDOM.render(
   <Provider store={store}>
-    { /* Tell the Router to use our enhanced history */ }
-    <Router history={history}>
-      <Route path="/" component={App}>
-      </Route>
+    <Router>
+        <Route path="/:filter?" component={App} />
     </Router>
   </Provider>,
-  document.getElementById('mount')
+  document.getElementById('root')
 )
