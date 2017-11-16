@@ -11,7 +11,7 @@ const initialState = {
   error: null,
 };
 
-export default function check(state = initialState, action) {
+export function check(state = initialState, action) {
   switch (action.type) {
     case CHECK_PHONE_REQUEST:
       return Object.assign({}, state, {

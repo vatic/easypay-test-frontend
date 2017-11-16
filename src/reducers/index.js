@@ -1,9 +1,12 @@
 import { combineReducers } from 'redux';
 
-import check from './check_phone';
+import { check } from './check_phone';
+import { login } from './login';
 
-const phones = combineReducers({
+export const phones = combineReducers({
   check,
 });
 
-export default phones;
+export const auth = combineReducers({
+  login,
+});
