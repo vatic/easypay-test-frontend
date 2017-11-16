@@ -8,7 +8,7 @@ export default class Login extends Component {
 
   componentWillReceiveProps(nextProps) {
     console.log(nextProps);
-    if (typeof nextProps.accessToken === 'string') nextProps.history.push('/');
+    if (typeof nextProps.accessToken === 'string' && nextProps.accessToken.length > 0) nextProps.history.push('/');
   }
 
   resetComponent = () => this.setState({ username: '', password: '' });
