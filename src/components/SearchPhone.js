@@ -3,17 +3,17 @@ import { Search, Label } from 'semantic-ui-react';
 
 export default class SearchPhone extends Component {
   componentWillMount() {
-    this.resetComponent()
-  };
+    this.resetComponent();
+  }
 
-  resetComponent = () => this.setState({ isLoading: false, results: [], value: ''});
+  resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
 
-  handleResultSelect = (e, { result }) => this.setState({ value: result.phone})
-  
+  handleResultSelect = (e, { result }) => this.setState({ value: result.phone })
+
   handleSearchChange = (e, { value }) => {
-    this.setState({ isLoading: this.props.isFetching, value })
+    this.setState({ isLoading: this.props.isFetching, value });
     if (value.length > 2) this.props.checkPhone(value);
-  };
+  }
 
   resultRenderer = ({ phone }) => <Label horizontal size='large' color='purple' content={phone} />
 
@@ -28,5 +28,5 @@ export default class SearchPhone extends Component {
       resultRenderer={this.resultRenderer}
       />
     );
-  };
-};
+  }
+}
