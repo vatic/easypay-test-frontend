@@ -6,13 +6,18 @@ export default class Login extends Component {
     this.resetComponent();
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+    if (typeof nextProps.accessToken === 'string') nextProps.history.push('/');
+  }
+
   resetComponent = () => this.setState({ username: '', password: '' });
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
 
   handleSubmit = () => {
     const { username, password } = this.state;
-    this.props.loginAction(username, password);
+    this.props.loginAction(username, password)
   }
 
   render() {

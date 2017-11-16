@@ -5,7 +5,6 @@ import Login from '../components/Login';
 
 
 const mapStateToProps = (state) => {
-  console.log(state.auth.login);
   const { login } = state.auth;
   return login;
 };

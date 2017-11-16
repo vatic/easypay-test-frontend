@@ -8,9 +8,10 @@ const initialState = {
   tokenType: '',
   accessToken: '',
   expiresIn: '',
-  error: null,
+  error: {},
 };
 
+// eslint-disable-next-line import/prefer-default-export
 export function login(state = initialState, action) {
   switch (action.type) {
     case LOGIN_REQUEST:
@@ -18,17 +19,18 @@ export function login(state = initialState, action) {
         isFetching: true,
       });
     case LOGIN_SUCCESS:
+      console.log(action.payload);
       return Object.assign({}, state, {
         isFetching: false,
-        tokenType: action.payload.tokenType,
-        accessToken: action.payload.accessToken,
-        expiresIn: action.payload.expiresIn,
-        error: null,
+        tokenType: action.payload.token_type,
+        accessToken: action.payload.access_token,
+        expiresIn: action.payload.expires_in,
+        error: action.payload.error,
       });
     case LOGIN_FAILURE:
       return Object.assign({}, state, {
         isFetching: false,
-        error: action.error,
+        error: action.payload.error,
       });
     default:
       return state;
