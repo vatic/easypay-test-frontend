@@ -24,6 +24,7 @@ module.exports = {
     "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }],
     "import/no-named-as-default": "off",
     "import/no-named-as-default-member": "off",
-    "function-paren-newline": "off"
+    "function-paren-newline": "off",
+    "class-methods-use-this": "off"
   },
 };

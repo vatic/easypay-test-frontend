@@ -15,7 +15,7 @@ export default class SearchPhone extends Component {
     if (value.length > 2) this.props.checkPhone(value);
   }
 
-  resultRenderer = ({ phone }) => <Label horizontal size='large' color='purple' content={phone} />
+  resultRenderer = ({ phone }) => <Label horizontal size='large' color='grey' content={phone} />
 
   render() {
     return (
