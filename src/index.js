@@ -1,24 +1,25 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from "redux-thunk";
-import { Provider } from 'react-redux'
+import logger from 'redux-logger';
+import { Provider } from 'react-redux';
 
-import createHistory from 'history/createBrowserHistory'
-
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import App from './App.js';
 
-import reducers from './reducers' // Or wherever you keep your reducers
+import reducers from './reducers'; // Or wherever you keep your reducers
+
+
 
 const store = createStore(
   combineReducers({
-    ...reducers,
+    reducers,
   }),
-  applyMiddleware(thunk)
-)
+  applyMiddleware(thunk, logger)
+);
 
 // Now you can dispatch navigation actions from anywhere!
 // store.dispatch(push('/foo'))
@@ -26,8 +27,8 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-        <Route path="/:filter?" component={App} />
+      <Route path="/" component={App} />
     </Router>
   </Provider>,
   document.getElementById('root')
-)
+);
