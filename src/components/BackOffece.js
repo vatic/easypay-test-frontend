@@ -3,23 +3,21 @@ import { Container, Table, Icon, Label, Menu } from 'semantic-ui-react';
 
 export default class BackOffice extends Component {
   componentWillMount() {
-    this.resetComponent();
+    this.props.getPhones();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (typeof nextProps.accessToken === 'string' && nextProps.accessToken.length > 0) nextProps.history.push('/');
+  renderRow() {
+    return this.props.result.map(p => (
+      <Table.Row key={p.id}>
+        <Table.Cell>{p.id}</Table.Cell>
+        <Table.Cell>{p.phone}</Table.Cell>
+      </Table.Row>
+    ));
   }
 
-  resetComponent = () => this.setState({ username: '', password: '' });
-
-  handleChange = (e, { name, value }) => this.setState({ [name]: value });
-
-  handleSubmit = () => {
-    const { username, password } = this.state;
-    this.props.loginAction(username, password)
-  }
 
   render() {
+    console.log('result', this.props.result);
     return (
       <Container>
         <Table celled>
@@ -32,23 +30,7 @@ export default class BackOffice extends Component {
           </Table.Header>
       
           <Table.Body>
-            <Table.Row>
-              <Table.Cell>
-                <Label ribbon>First</Label>
-              </Table.Cell>
-              <Table.Cell>Cell</Table.Cell>
-              <Table.Cell>Cell</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>Cell</Table.Cell>
-              <Table.Cell>Cell</Table.Cell>
-              <Table.Cell>Cell</Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>Cell</Table.Cell>
-              <Table.Cell>Cell</Table.Cell>
-              <Table.Cell>Cell</Table.Cell>
-            </Table.Row>
+            {this.renderRow()}
           </Table.Body>
       
           <Table.Footer>
