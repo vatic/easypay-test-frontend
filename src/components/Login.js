@@ -7,8 +7,11 @@ export default class Login extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
-    if (typeof nextProps.accessToken === 'string' && nextProps.accessToken.length > 0) nextProps.history.push('/');
+    const { accessToken, saveToken, history } = nextProps;
+    if (typeof accessToken === 'string' && accessToken.length > 0) {
+      saveToken(accessToken).run();
+      history.push('/bo');
+    }
   }
 
   resetComponent = () => this.setState({ username: '', password: '' });
@@ -17,12 +20,11 @@ export default class Login extends Component {
 
   handleSubmit = () => {
     const { username, password } = this.state;
-    this.props.loginAction(username, password)
+    this.props.loginAction(username, password);
   }
 
   render() {
     const { username, password } = this.state;
-    console.log(this.props);
     return (
       <Container>
         <Grid verticalAlign='middle' textAlign='center' centered={true} columns={3}>

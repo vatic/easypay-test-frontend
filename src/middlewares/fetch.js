@@ -1,5 +1,5 @@
 import 'whatwg-fetch';
-import logger from 'winston';
+// import logger from 'winston';
 
 const fetchMiddleware = store => next => (action) => {
   if (!action || !action.API_CALL) return next(action);
