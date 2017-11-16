@@ -1,11 +1,9 @@
 import { combineReducers } from 'redux';
 
-import checkPhone from './check_phone';
+import check from './check_phone';
 
-const phones = combineReducers(
-  {
-    checkPhone,
-  }
-)
+const phones = combineReducers({
+  check,
+});
 
 export default phones;
