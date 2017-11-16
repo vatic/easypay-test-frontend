@@ -10,7 +10,8 @@ const checkPhone = phone => ({
     endpoint: config.ENDPOINTS.CHECK_PHONE(phone),
     method: 'GET',
     types: [CHECK_PHONE_REQUEST, CHECK_PHONE_SUCCESS, CHECK_PHONE_FAILURE],
-    }
+    },
+    extraParams: { phone }
   }
 );
 

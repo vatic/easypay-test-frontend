@@ -6,11 +6,12 @@ import {
 
 const initialState = {
   results: [],
-  value: null,
-  isFetching: false
+  value: '',
+  isFetching: false,
+  error: null,
 }
 
-export default function checkPhone(state = initialState, action) {
+export default function check(state = initialState, action) {
 switch (action.type) {
   case CHECK_PHONE_REQUEST:
     return Object.assign({}, state, {
@@ -19,7 +20,8 @@ switch (action.type) {
   case CHECK_PHONE_SUCCESS:
     return Object.assign({}, state, {
       isFetching: false,
-      phone: action.payload.data,
+      results: action.payload.phones,
+      value: action.extraParams.phone,
       error: null,
     })
   case CHECK_PHONE_FAILURE:

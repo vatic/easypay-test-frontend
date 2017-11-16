@@ -64,4 +64,4 @@ const fetchMiddleware = store => next => action => {
 
 }
 
-module.exports = fetchMiddleware;
+export default fetchMiddleware;

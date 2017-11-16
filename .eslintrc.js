@@ -1,5 +1,5 @@
 module.exports = {
-  "extends": "airbnb",
+  "extends": "airbnb-base",
   "extends": "react-app",
   "plugins": [
       "react",
