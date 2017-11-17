@@ -24,7 +24,7 @@ export const getPhones = () => ({
 
 export const delPhone = phone => ({
   API_CALL: {
-    endpoint: config.ENDPOINTS.ADD_PHONE(phone),
+    endpoint: config.ENDPOINTS.DEL_PHONE(phone),
     method: 'DELETE',
     types: [DEL_PHONE_REQUEST, DEL_PHONE_SUCCESS, DEL_PHONE_FAILURE],
     headers: { Authorization: `Bearer ${getToken().run()}` },

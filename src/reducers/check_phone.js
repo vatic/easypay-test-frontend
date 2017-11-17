@@ -11,11 +11,13 @@ const initialState = {
   error: null,
 };
 
+// eslint-disable-next-line import/prefer-default-export
 export function check(state = initialState, action) {
   switch (action.type) {
     case CHECK_PHONE_REQUEST:
       return Object.assign({}, state, {
         isFetching: true,
+        error: null,
       });
     case CHECK_PHONE_SUCCESS:
       return Object.assign({}, state, {
@@ -27,7 +29,8 @@ export function check(state = initialState, action) {
     case CHECK_PHONE_FAILURE:
       return Object.assign({}, state, {
         isFetching: false,
-        error: action.error,
+        error: action.payload.error,
+        results: [],
       });
     default:
       return state;

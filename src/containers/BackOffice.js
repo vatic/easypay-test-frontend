@@ -5,8 +5,12 @@ import deleteToken from '../actions/auth/deleteToken';
 import BackOffice from '../components/BackOffece';
 
 const mapStateToProps = (state) => {
-  const { list } = state.phones;
-  return list;
+  const { add, del, list } = state.phones;
+  return {
+    list,
+    add,
+    del,
+  };
 };
 
 export default connect(mapStateToProps, {

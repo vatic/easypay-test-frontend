@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Input, Container, Table, Grid, Icon, Menu, Button } from 'semantic-ui-react';
+import InfoMessage from './InfoMessage';
 
 
 export default class BackOffice extends Component {
@@ -9,7 +10,7 @@ export default class BackOffice extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { error, history, deleteToken } = nextProps;
+    const { error, history, deleteToken } = nextProps.list;
     if (error !== null && !error.ok) {
       deleteToken().run();
       history.push('/login');
@@ -36,7 +37,8 @@ export default class BackOffice extends Component {
   }
 
   renderRow() {
-    const { result, delPhone } = this.props;
+    const { result } = this.props.list;
+    const { delPhone } = this.props;
     return result.map(p => (
       <Table.Row key={p.id}>
         <Table.Cell>{p.id}</Table.Cell>
@@ -50,8 +52,21 @@ export default class BackOffice extends Component {
     ));
   }
 
+  renderMessage(key) {
+    const { status, msg, errorMsg } = this.props[key];
+    console.log(this.props[key]);
+    const color = status ? 'green' : 'red';
+    const text = status ? msg : errorMsg;
+    if (text !== '') {
+      return (
+        <InfoMessage color={color} header={text} timeout={5000} />
+      );
+    }
+    return null;
+  }
+
   render() {
-    const { length } = this.props.result;
+    const { length } = this.props.list.result;
     const { addPhone } = this.props;
     return (
       <Container>
@@ -83,18 +98,20 @@ export default class BackOffice extends Component {
               </Table>
             </Grid.Column>
             <Grid.Column width={3}>
+              {this.renderMessage('del')}
             </Grid.Column>
           </Grid.Row>
           <Grid.Row centered textAlign='center'>
-            <Grid.Column width={3}>
+            <Grid.Column width={6}>
             </Grid.Column>
-            <Grid.Column width={10}>
+            <Grid.Column width={4}>
               <Input type='text' placeholder='123-456-7890' action onChange={(e, { value }) => this.setState({ currentAddInputText: value })}>
               <input />
               <Button type='submit' color='teal' onClick={() => addPhone(this.state.currentAddInputText)}>Add Phone</Button>
               </Input>
+              {this.renderMessage('add')}
             </Grid.Column>
-            <Grid.Column width={3}>
+            <Grid.Column width={6}>
             </Grid.Column>
           </Grid.Row>
         </Grid>

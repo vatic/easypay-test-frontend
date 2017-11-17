@@ -37,7 +37,6 @@ const fetchMiddleware = store => next => (action) => {
 
   return fetch(endpoint, config)
     .then((response) => {
-      console.log('data', data)
       if (!response.ok) { // (response.status < 200 || response.status > 300)
         store.dispatch({
           type: types[2],
@@ -49,6 +48,7 @@ const fetchMiddleware = store => next => (action) => {
       return Promise.resolve(response);
     })
     .then((response) => {
+      console.log('fetch', response);
       const blobOrJson = binary ? response.blob() : response.json();
       return blobOrJson;
     })
