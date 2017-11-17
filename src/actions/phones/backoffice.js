@@ -9,6 +9,10 @@ export const DEL_PHONE_REQUEST = 'DEL_PHONE_REQUEST';
 export const DEL_PHONE_SUCCESS = 'DEL_PHONE_SUCCESS';
 export const DEL_PHONE_FAILURE = 'DEL_PHONE_FAILURE';
 
+export const ADD_PHONE_REQUEST = 'ADD_PHONE_REQUEST';
+export const ADD_PHONE_SUCCESS = 'ADD_PHONE_SUCCESS';
+export const ADD_PHONE_FAILURE = 'ADD_PHONE_FAILURE';
+
 export const getPhones = () => ({
   API_CALL: {
     endpoint: config.ENDPOINTS.PHONES,
@@ -20,9 +24,20 @@ export const getPhones = () => ({
 
 export const delPhone = phone => ({
   API_CALL: {
-    endpoint: config.ENDPOINTS.DEL_PHONE(phone),
+    endpoint: config.ENDPOINTS.ADD_PHONE(phone),
     method: 'DELETE',
     types: [DEL_PHONE_REQUEST, DEL_PHONE_SUCCESS, DEL_PHONE_FAILURE],
+    headers: { Authorization: `Bearer ${getToken().run()}` },
+    nextAction: getPhones,
+  },
+});
+
+export const addPhone = phone => ({
+  API_CALL: {
+    endpoint: config.ENDPOINTS.PHONES,
+    method: 'POST',
+    types: [ADD_PHONE_REQUEST, ADD_PHONE_SUCCESS, ADD_PHONE_FAILURE],
+    data: JSON.stringify({ phone }),
     headers: { Authorization: `Bearer ${getToken().run()}` },
     nextAction: getPhones,
   },

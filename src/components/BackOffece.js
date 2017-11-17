@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Container, Table, Grid, Icon, Menu, Button } from 'semantic-ui-react';
+import { Input, Container, Table, Grid, Icon, Menu, Button } from 'semantic-ui-react';
 
 
 export default class BackOffice extends Component {
   componentWillMount() {
+    this.setState({ currentAddInputText: '' })
     this.props.getPhones();
   }
 
@@ -19,18 +20,18 @@ export default class BackOffice extends Component {
     const numOfPages = Math.floor(length / 10) + 1;
     const tempAry = [...Array(numOfPages).keys()];
     const pageItems = tempAry.map((item, i) => (
-        <Menu.Item as='a' key={`menu_item_${i}`}>{i + 1}</Menu.Item>
+      <Menu.Item as='a' key={`menu_item_${i}`}>{i + 1}</Menu.Item>
     ));
     return (
       <Menu floated='right' pagination>
-      <Menu.Item as='a' icon>
-        <Icon name='left chevron' />
-      </Menu.Item>
-      {pageItems}
-      <Menu.Item as='a' icon>
-        <Icon name='right chevron' />
-      </Menu.Item>
-    </Menu>
+        <Menu.Item as='a' icon>
+          <Icon name='left chevron' />
+        </Menu.Item>
+        {pageItems}
+        <Menu.Item as='a' icon>
+          <Icon name='right chevron' />
+        </Menu.Item>
+      </Menu>
     );
   }
 
@@ -48,41 +49,54 @@ export default class BackOffice extends Component {
       </Table.Row>
     ));
   }
-  
+
   render() {
     const { length } = this.props.result;
+    const { addPhone } = this.props;
     return (
       <Container>
         <Grid centered>
-      <Grid.Row>
-        <Grid.Column width={4}>
-        </Grid.Column>
-        <Grid.Column width={8}>
-          <Table celled columns={4} textAlign='center'>
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell>Id</Table.HeaderCell>
-                <Table.HeaderCell>Phone</Table.HeaderCell>
-                <Table.HeaderCell>Actions</Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
-        
-            <Table.Body>
-              {this.renderRow()}
-            </Table.Body>
-        
-            <Table.Footer>
-              <Table.Row>
-                <Table.HeaderCell colSpan='3'>
-                  {this.renderPagination(length)}
-                </Table.HeaderCell>
-              </Table.Row>
-            </Table.Footer>
-          </Table>
-        </Grid.Column>
-        <Grid.Column width={3}>
-        </Grid.Column>
-      </Grid.Row>
+          <Grid.Row>
+            <Grid.Column width={3}>
+            </Grid.Column>
+            <Grid.Column width={10}>
+              <Table celled columns={4} textAlign='center'>
+                <Table.Header>
+                  <Table.Row>
+                    <Table.HeaderCell>Id</Table.HeaderCell>
+                    <Table.HeaderCell>Phone</Table.HeaderCell>
+                    <Table.HeaderCell>Actions</Table.HeaderCell>
+                  </Table.Row>
+                </Table.Header>
+
+                <Table.Body>
+                  {this.renderRow()}
+                </Table.Body>
+
+                <Table.Footer>
+                  <Table.Row>
+                    <Table.HeaderCell colSpan='3'>
+                      {this.renderPagination(length)}
+                    </Table.HeaderCell>
+                  </Table.Row>
+                </Table.Footer>
+              </Table>
+            </Grid.Column>
+            <Grid.Column width={3}>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row centered textAlign='center'>
+            <Grid.Column width={3}>
+            </Grid.Column>
+            <Grid.Column width={10}>
+              <Input type='text' placeholder='123-456-7890' action onChange={(e, { value }) => this.setState({ currentAddInputText: value })}>
+              <input />
+              <Button type='submit' color='teal' onClick={() => addPhone(this.state.currentAddInputText)}>Add Phone</Button>
+              </Input>
+            </Grid.Column>
+            <Grid.Column width={3}>
+            </Grid.Column>
+          </Grid.Row>
         </Grid>
       </Container>
     );
