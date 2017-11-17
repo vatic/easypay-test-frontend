@@ -21,10 +21,11 @@ module.exports = {
   },
   "rules": {
     "jsx-a11y/href-no-hash": "off",
-    "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }],
+    "jsx-a11y/anchor-is-valid": "off",
     "import/no-named-as-default": "off",
     "import/no-named-as-default-member": "off",
     "function-paren-newline": "off",
-    "class-methods-use-this": "off"
+    "class-methods-use-this": "off",
+    "react/jsx-uses-vars": "error"
   },
 };

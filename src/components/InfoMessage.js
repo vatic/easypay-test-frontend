@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Message } from 'semantic-ui-react';
 
-class InfoMessage extends Component {
+class InfoMessage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { visible: true }
+    this.state = { visible: true };
   }
 
   handleDismiss = () => {
@@ -13,7 +13,13 @@ class InfoMessage extends Component {
 
 
   render() {
-    const { timeout, header, content, color } = this.props;
+    const {
+      timeout,
+      header,
+      content,
+      color,
+    } = this.props;
+
     setTimeout(() => {
       this.setState({ visible: false });
     }, timeout);

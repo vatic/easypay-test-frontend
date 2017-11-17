@@ -48,7 +48,6 @@ const fetchMiddleware = store => next => (action) => {
       return Promise.resolve(response);
     })
     .then((response) => {
-      console.log('fetch', response);
       const blobOrJson = binary ? response.blob() : response.json();
       return blobOrJson;
     })

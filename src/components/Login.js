@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Form, Button, Container, Grid, Header } from 'semantic-ui-react';
 
-export default class Login extends Component {
+export default class Login extends React.Component {
   componentWillMount() {
     this.resetComponent();
   }
@@ -35,7 +35,7 @@ export default class Login extends Component {
                 <Form.Input placeholder='Username' name='username' value={username} onChange={this.handleChange} />
               </Form.Field>
               <Form.Field>
-                <Form.Input placeholder='Password' name='password' type='password' value={password} onChange={this.handleChange} />  
+                <Form.Input placeholder='Password' name='password' type='password' value={password} onChange={this.handleChange} />
               </Form.Field>
               <Button type='submit'>Submit</Button>
             </Form>

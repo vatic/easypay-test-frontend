@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Input, Container, Table, Grid, Icon, Menu, Button } from 'semantic-ui-react';
 import InfoMessage from './InfoMessage';
 
 
-export default class BackOffice extends Component {
+export default class BackOffice extends React.Component {
   componentWillMount() {
-    this.setState({ currentAddInputText: '' })
+    this.setState({ currentAddInputText: '' });
     this.props.getPhones();
   }
 
   componentWillReceiveProps(nextProps) {
-    const { error, history, deleteToken } = nextProps.list;
+    const { error } = nextProps.list;
+    const { history, deleteToken } = nextProps;
     if (error !== null && !error.ok) {
       deleteToken().run();
       history.push('/login');
@@ -54,7 +55,6 @@ export default class BackOffice extends Component {
 
   renderMessage(key) {
     const { status, msg, errorMsg } = this.props[key];
-    console.log(this.props[key]);
     const color = status ? 'green' : 'red';
     const text = status ? msg : errorMsg;
     if (text !== '') {
