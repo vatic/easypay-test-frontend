@@ -1,36 +1,31 @@
 import {
-  CHECK_PHONE_REQUEST,
-  CHECK_PHONE_SUCCESS,
-  CHECK_PHONE_FAILURE } from '../actions/phones/check_phone';
-
+  PHONES_REQUEST,
+  PHONES_SUCCESS,
+  PHONES_FAILURE } from '../actions/phones//backoffice';
 
 const initialState = {
-  results: [],
-  value: '',
+  result: [],
   isFetching: false,
   error: null,
 };
 
-// eslint-disable-next-line import/prefer-default-export
-export function check(state = initialState, action) {
+export default function list(state = initialState, action) {
   switch (action.type) {
-    case CHECK_PHONE_REQUEST:
+    case PHONES_REQUEST:
       return Object.assign({}, state, {
         isFetching: true,
         error: null,
       });
-    case CHECK_PHONE_SUCCESS:
+    case PHONES_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        results: action.payload.phones,
-        value: action.extraParams.phone,
+        result: action.payload,
         error: null,
       });
-    case CHECK_PHONE_FAILURE:
+    case PHONES_FAILURE:
       return Object.assign({}, state, {
         isFetching: false,
         error: action.payload.error,
-        results: [],
       });
     default:
       return state;

@@ -19,7 +19,6 @@ export function login(state = initialState, action) {
         isFetching: true,
       });
     case LOGIN_SUCCESS:
-      console.log(action.payload);
       return Object.assign({}, state, {
         isFetching: false,
         tokenType: action.payload.token_type,

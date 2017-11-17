@@ -14,6 +14,7 @@ const fetchMiddleware = store => next => (action) => {
     binary,
     data,
     noCredentials,
+    nextAction,
   } = action.API_CALL;
 
   const { extraParams } = action;
@@ -37,8 +38,6 @@ const fetchMiddleware = store => next => (action) => {
   return fetch(endpoint, config)
     .then((response) => {
       if (!response.ok) { // (response.status < 200 || response.status > 300)
-        // logger.error(`not ok response: ${response.status}`);
-        // return Promise.reject(new Error(response.statusText));
         store.dispatch({
           type: types[2],
           payload: { error: response },
@@ -58,30 +57,10 @@ const fetchMiddleware = store => next => (action) => {
         payload: json,
         extraParams,
       });
+    })
+    .then(() => {
+      if (nextAction) store.dispatch(nextAction());
     });
-    // .catch((error) => {
-    //   // logger.error('error response: ', error);
-    //   const { response } = error;
-    //   const err = error;
-    //   if (response === undefined) {
-    //     throw error;
-    //   } else {
-    //     err.status = response.status;
-    //     err.statusText = response.statusText;
-    //     response.text().then((text) => {
-    //       try {
-    //         const json = JSON.parse(text);
-    //         err.message = json.message;
-    //       } catch (ex) {
-    //         err.message = text;
-    //       }
-    //       store.dispatch({
-    //         type: types[2],
-    //         error,
-    //       });
-    //     });
-    //   }
-    // });
 };
 
 export default fetchMiddleware;

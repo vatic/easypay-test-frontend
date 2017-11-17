@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Search, Label } from 'semantic-ui-react';
 
-export default class SearchPhone extends Component {
+export default class SearchPhone extends React.Component {
   componentWillMount() {
     this.resetComponent();
   }
