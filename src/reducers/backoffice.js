@@ -15,18 +15,19 @@ export default function list(state = initialState, action) {
     case PHONES_REQUEST:
       return Object.assign({}, state, {
         isFetching: true,
+        error: {},
       });
     case PHONES_SUCCESS:
       console.log(action.payload);
       return Object.assign({}, state, {
         isFetching: false,
         result: action.payload,
-        error: null,
+        error: {},
       });
     case PHONES_FAILURE:
       return Object.assign({}, state, {
         isFetching: false,
-        error: action.error,
+        error: action.payload.error,
       });
     default:
       return state;

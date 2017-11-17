@@ -39,6 +39,7 @@ const fetchMiddleware = store => next => (action) => {
       if (!response.ok) { // (response.status < 200 || response.status > 300)
         // logger.error(`not ok response: ${response.status}`);
         // return Promise.reject(new Error(response.statusText));
+        console.log(response);
         store.dispatch({
           type: types[2],
           payload: { error: response },
