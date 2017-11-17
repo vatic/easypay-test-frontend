@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Table, Grid, Icon, Menu, Button } from 'semantic-ui-react';
 
+
 export default class BackOffice extends Component {
   componentWillMount() {
     this.props.getPhones();
@@ -8,7 +9,7 @@ export default class BackOffice extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { error, history, deleteToken } = nextProps;
-    if (Object.keys(error).length > 0 &&!error.ok) {
+    if (error !== null && !error.ok) {
       deleteToken().run();
       history.push('/login');
     }
@@ -30,17 +31,20 @@ export default class BackOffice extends Component {
         <Icon name='right chevron' />
       </Menu.Item>
     </Menu>
-    )
-    
+    );
   }
 
   renderRow() {
-    const { result } = this.props;
+    const { result, delPhone } = this.props;
     return result.map(p => (
       <Table.Row key={p.id}>
         <Table.Cell>{p.id}</Table.Cell>
         <Table.Cell>{p.phone}</Table.Cell>
-        <Table.Cell><Button color='red'>Delete</Button></Table.Cell>
+        <Table.Cell>
+          <Button size='mini' color='red' onClick={() => delPhone(p.phone)}>
+            Delete
+          </Button>
+        </Table.Cell>
       </Table.Row>
     ));
   }

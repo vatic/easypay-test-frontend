@@ -1,28 +1,30 @@
 import {
-  PHONES_REQUEST,
-  PHONES_SUCCESS,
-  PHONES_FAILURE } from '../actions/phones//backoffice';
+  DEL_PHONE_REQUEST,
+  DEL_PHONE_SUCCESS,
+  DEL_PHONE_FAILURE } from '../actions/phones//backoffice';
 
 const initialState = {
-  result: [],
+  status: false,
+  msg: '',
   isFetching: false,
   error: null,
 };
 
-export default function list(state = initialState, action) {
+export default function delPhone(state = initialState, action) {
   switch (action.type) {
-    case PHONES_REQUEST:
+    case DEL_PHONE_REQUEST:
       return Object.assign({}, state, {
         isFetching: true,
         error: null,
       });
-    case PHONES_SUCCESS:
+    case DEL_PHONE_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        result: action.payload,
+        msg: action.payload.msg,
+        status: action.payload.status,
         error: null,
       });
-    case PHONES_FAILURE:
+    case DEL_PHONE_FAILURE:
       return Object.assign({}, state, {
         isFetching: false,
         error: action.payload.error,
