@@ -22,11 +22,11 @@ export default class BackOffice extends React.Component {
     const numOfPages = Math.floor(length / 10) + 1;
     const tempAry = [...Array(numOfPages).keys()];
     const pageItems = tempAry.map((item, i) => (
-      <Menu.Item as='a' key={`menu_item_${i}`}>{i + 1}</Menu.Item>
+      <Menu.Item as='a' onClick={(e, data) => console.log(data)} key={`menu_item_${i}`}>{i + 1}</Menu.Item>
     ));
     return (
       <Menu floated='right' pagination>
-        <Menu.Item as='a' icon>
+        <Menu.Item as='a' icon >
           <Icon name='left chevron' />
         </Menu.Item>
         {pageItems}
@@ -106,8 +106,8 @@ export default class BackOffice extends React.Component {
             </Grid.Column>
             <Grid.Column width={4}>
               <Input type='text' placeholder='123-456-7890' action onChange={(e, { value }) => this.setState({ currentAddInputText: value })}>
-              <input />
-              <Button type='submit' color='teal' onClick={() => addPhone(this.state.currentAddInputText)}>Add Phone</Button>
+                <input />
+                <Button type='submit' color='teal' onClick={() => addPhone(this.state.currentAddInputText)}>Add Phone</Button>
               </Input>
               {this.renderMessage('add')}
             </Grid.Column>
