@@ -1,6 +1,7 @@
 import React from 'react';
 import { Input, Container, Table, Grid, Icon, Menu, Button } from 'semantic-ui-react';
 import InfoMessage from './InfoMessage';
+import TopMenu from '../containers/TopMenu';
 
 
 export default class BackOffice extends React.Component {
@@ -70,6 +71,7 @@ export default class BackOffice extends React.Component {
     const { addPhone } = this.props;
     return (
       <Container>
+        <TopMenu history={this.props.history} />
         <Grid centered>
           <Grid.Row>
             <Grid.Column width={3}>

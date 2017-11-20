@@ -5,7 +5,7 @@ import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import fetchMiddleware from '../middlewares/fetch';
 
-import { phones, auth } from '../reducers';
+import auth, { phones } from '../reducers';
 
 const logger = createLogger();
 // const routerMW = routerMiddleware(hashHistory)

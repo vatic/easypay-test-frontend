@@ -6,7 +6,11 @@ export default class SearchPhone extends React.Component {
     this.resetComponent();
   }
 
-  resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
+  resetComponent = () => this.setState({
+    isLoading: this.props.isFetching,
+    results: [],
+    value: '',
+  });
 
   handleResultSelect = (e, { result }) => this.setState({ value: result.phone })
 
@@ -15,7 +19,8 @@ export default class SearchPhone extends React.Component {
     if (value.length > 2) this.props.checkPhone(value);
   }
 
-  resultRenderer = ({ phone }) => <Label horizontal size='large' color='grey' content={phone} />
+  resultRenderer = ({ phone }) =>
+    <Label horizontal size='large' color='grey' content={phone} />
 
   render() {
     return (
