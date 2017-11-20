@@ -27,6 +27,5 @@ export const logout = token => ({
     types: [LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILURE],
     data: JSON.stringify({ token }),
     headers: { Authorization: `Bearer ${token}` },
-    // nextAction: login,
   },
 });

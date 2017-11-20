@@ -8,6 +8,7 @@ const config = {
     LOGIN: `${API_ROOT_NODE}/login`,
     LOGOUT: `${API_ROOT_NODE}/logout`,
     PHONES: `${API_ROOT_NODE}/phones`,
+    PHONES_TOTAL: `${API_ROOT_NODE}/phones/total`,
     DEL_PHONE: phone => `${API_ROOT_NODE}/phones/${phone}`,
   },
 };
