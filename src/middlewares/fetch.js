@@ -14,7 +14,7 @@ const fetchMiddleware = store => next => (action) => {
     binary,
     data,
     noCredentials,
-    nextAction,
+    nextActions,
   } = action.API_CALL;
 
   const { extraParams } = action;
@@ -37,7 +37,6 @@ const fetchMiddleware = store => next => (action) => {
 
   return fetch(endpoint, config)
     .then((response) => {
-      console.dir(config);
       if (!response.ok) { // (response.status < 200 || response.status > 300)
         store.dispatch({
           type: types[2],
@@ -53,6 +52,7 @@ const fetchMiddleware = store => next => (action) => {
       return blobOrJson;
     })
     .then((json) => {
+      console.log('extra', extraParams);
       store.dispatch({
         type: types[1],
         payload: json,
@@ -60,7 +60,22 @@ const fetchMiddleware = store => next => (action) => {
       });
     })
     .then(() => {
-      if (nextAction) store.dispatch(nextAction());
+      console.log('fetch', action);
+      if (nextActions && nextActions.length > 0) {
+        nextActions.map((a) => {
+          if (a.name === 'getPhones') {
+            const { currentOffset, total } = store.getState().phones.list;
+            if (action.API_CALL.method === 'DELETE') {
+              return store.dispatch(a(currentOffset));
+            } else if (action.API_CALL.method === 'POST') {
+              // const numOfPages = total % 10 === 0 ? Math.floor(total / 10) : Math.floor(total / 10) + 1;
+              const numOfPages = Math.floor(total / 10);
+              return store.dispatch(a(numOfPages * 10));
+            }
+          }
+          return store.dispatch(a());
+        });
+      }
     });
 };
 

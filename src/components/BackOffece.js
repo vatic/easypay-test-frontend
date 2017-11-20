@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Container, Table, Grid, Icon, Menu, Button } from 'semantic-ui-react';
+import { Header, Input, Container, Table, Grid, Icon, Menu, Button } from 'semantic-ui-react';
 import InfoMessage from './InfoMessage';
 import TopMenu from '../containers/TopMenu';
 
@@ -7,7 +7,8 @@ import TopMenu from '../containers/TopMenu';
 export default class BackOffice extends React.Component {
   componentWillMount() {
     this.setState({ currentAddInputText: '' });
-    this.props.getPhones();
+    this.props.getPhones(0);
+    this.props.getTotal();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -20,18 +21,30 @@ export default class BackOffice extends React.Component {
   }
 
   renderPagination(length) {
-    const numOfPages = Math.floor(length / 10) + 1;
+    const numOfPages = length % 10 === 0 ? Math.floor(length / 10) : Math.floor(length / 10) + 1;
     const tempAry = [...Array(numOfPages).keys()];
+    const { currentOffset, total } = this.props.list;
+    const prev = (currentOffset - 10) > 0 ? (currentOffset - 10) : 0;
+    const next = (currentOffset + 10) < total ? (currentOffset + 10) : currentOffset;
     const pageItems = tempAry.map((item, i) => (
-      <Menu.Item as='a' onClick={(e, data) => console.log(data)} key={`menu_item_${i}`}>{i + 1}</Menu.Item>
+      <Menu.Item
+        as='a'
+        onClick={(e, { children }) => this.props.getPhones((children - 1) * 10)}
+        key={`menu_item_${i}`}>{i + 1}</Menu.Item>
     ));
     return (
       <Menu floated='right' pagination>
-        <Menu.Item as='a' icon >
+        <Menu.Item
+          onClick={(e, { children }) => this.props.getPhones(prev)}
+          disabled={currentOffset === 0}
+          as='a' icon >
           <Icon name='left chevron' />
         </Menu.Item>
         {pageItems}
-        <Menu.Item as='a' icon>
+        <Menu.Item
+          onClick={(e, { children }) => this.props.getPhones(next)}
+          disabled={currentOffset === next}
+          as='a' icon>
           <Icon name='right chevron' />
         </Menu.Item>
       </Menu>
@@ -67,7 +80,7 @@ export default class BackOffice extends React.Component {
   }
 
   render() {
-    const { length } = this.props.list.result;
+    const { total } = this.props.list;
     const { addPhone } = this.props;
     return (
       <Container>
@@ -92,8 +105,13 @@ export default class BackOffice extends React.Component {
 
                 <Table.Footer>
                   <Table.Row>
+                    <Table.HeaderCell>
+                      <Header as='h3' color='grey'>
+                        Total phones: {total}
+                      </Header>
+                    </Table.HeaderCell>
                     <Table.HeaderCell colSpan='3'>
-                      {this.renderPagination(length)}
+                      {this.renderPagination(total)}
                     </Table.HeaderCell>
                   </Table.Row>
                 </Table.Footer>
