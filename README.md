@@ -2,4 +2,5 @@
 
 #### Фронтэнд на React/Redux.
 
-###### Работающий фронтэнд на [https://easypay-test-frontend.herokuapp.com](https://easypay-test-frontend.herokuapp.com
+##### Работающий фронтэнд на [https://easypay-test-fronend.herokuapp.com](https://easypay-test-frontend.herokuapp.com)
+
