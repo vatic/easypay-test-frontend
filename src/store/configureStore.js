@@ -28,7 +28,7 @@ export default function configureStore() {
     ));
   } else {
     store = createStore(rootReducer, initialState, compose(
-      applyMiddleware(thunkMiddleware), f => f,
+      applyMiddleware(thunkMiddleware, fetchMiddleware),
     ));
   }
   return store;
