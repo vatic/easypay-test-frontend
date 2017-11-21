@@ -1,4 +1,4 @@
-const API_ROOT_NODE = `http://${window.location.hostname}:8080`;
+const API_ROOT_NODE = (process.env.NODE_ENV === 'production') ? 'https://easypay-test-backend.herokuapp.com' : `http://${window.location.hostname}:8080`;
 
 const config = {
   API_ROOT_NODE,

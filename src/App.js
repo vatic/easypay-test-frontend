@@ -12,7 +12,7 @@ const App = (props) => {
     <Header as='h1' color='grey'>Search Phone in Phonebook</Header>
     <SearchPhone />
   </Container>
-);
-}
+  );
+};
 
 export default App;
