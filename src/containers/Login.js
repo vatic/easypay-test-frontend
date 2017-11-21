@@ -5,8 +5,6 @@ import saveToken from '../actions/auth/saveToken';
 import Login from '../components/Login';
 
 
-const mapStateToProps = (state) => {
-  return state.auth;
-};
+const mapStateToProps = state => state.auth;
 
 export default connect(mapStateToProps, { loginAction, saveToken })(Login);

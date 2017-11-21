@@ -1,6 +1,4 @@
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
-// import { routerMiddleware, routerReducer } from 'react-router-redux'
-// import {hashHistory} from 'react-router'
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import fetchMiddleware from '../middlewares/fetch';
@@ -8,10 +6,9 @@ import fetchMiddleware from '../middlewares/fetch';
 import auth, { phones } from '../reducers';
 
 const logger = createLogger();
-// const routerMW = routerMiddleware(hashHistory)
+
 const rootReducer = combineReducers(
   {
-    // routing: routerReducer,
     phones,
     auth,
   },
@@ -28,7 +25,7 @@ export default function configureStore() {
     ));
   } else {
     store = createStore(rootReducer, initialState, compose(
-      applyMiddleware(thunkMiddleware, fetchMiddleware),
+      applyMiddleware(thunkMiddleware, fetchMiddleware, logger),
     ));
   }
   return store;

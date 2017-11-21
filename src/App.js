@@ -5,14 +5,12 @@ import './index.css';
 import TopMenu from './containers/TopMenu';
 import SearchPhone from './containers/SearchPhone';
 
-const App = (props) => {
-  return (
+const App = props => (
   <Container textAlign='center'>
     <TopMenu history={props.history} />
     <Header as='h1' color='grey'>Search Phone in Phonebook</Header>
     <SearchPhone />
   </Container>
-  );
-};
+);
 
 export default App;

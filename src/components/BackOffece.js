@@ -35,14 +35,14 @@ export default class BackOffice extends React.Component {
     return (
       <Menu floated='right' pagination>
         <Menu.Item
-          onClick={(e, { children }) => this.props.getPhones(prev)}
+          onClick={() => this.props.getPhones(prev)}
           disabled={currentOffset === 0}
           as='a' icon >
           <Icon name='left chevron' />
         </Menu.Item>
         {pageItems}
         <Menu.Item
-          onClick={(e, { children }) => this.props.getPhones(next)}
+          onClick={() => this.props.getPhones(next)}
           disabled={currentOffset === next}
           as='a' icon>
           <Icon name='right chevron' />

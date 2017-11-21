@@ -11,7 +11,7 @@ const initialState = {
   isFetching: false,
   total: 0,
   error: null,
-  currentOffset: 0
+  currentOffset: 0,
 };
 
 export default function list(state = initialState, action) {

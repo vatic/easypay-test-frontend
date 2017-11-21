@@ -52,7 +52,6 @@ const fetchMiddleware = store => next => (action) => {
       return blobOrJson;
     })
     .then((json) => {
-      console.log('extra', extraParams);
       store.dispatch({
         type: types[1],
         payload: json,
@@ -60,15 +59,13 @@ const fetchMiddleware = store => next => (action) => {
       });
     })
     .then(() => {
-      console.log('fetch', action);
       if (nextActions && nextActions.length > 0) {
-        nextActions.map((a) => {
-          if (a.name === 'getPhones') {
+        nextActions.map((a, i) => {
+          if (i === 0) {
             const { currentOffset, total } = store.getState().phones.list;
             if (action.API_CALL.method === 'DELETE') {
               return store.dispatch(a(currentOffset));
             } else if (action.API_CALL.method === 'POST') {
-              // const numOfPages = total % 10 === 0 ? Math.floor(total / 10) : Math.floor(total / 10) + 1;
               const numOfPages = Math.floor(total / 10);
               return store.dispatch(a(numOfPages * 10));
             }
